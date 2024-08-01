@@ -8,7 +8,6 @@ import { useRecoilValue } from 'recoil';
 import { AiOutlineLike, AiFillLike } from 'react-icons/ai';
 import { BiDislike, BiSolidDislike } from 'react-icons/bi';
 import axios from 'axios';
-import { API_KEY } from '../constant/youtube';
 import moment from 'moment';
 import WatchSkeleton from './WatchSkeleton';
 
@@ -36,7 +35,7 @@ const Watch = () => {
     try {
       setLoading(true)
       const res = await axios.get(
-        `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoId}&key=${API_KEY}`
+        `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoId}&key=${import.meta.env.VITE_API_KEY}`
       );
       setSingleVideo(res.data.items[0]);
       setLoading(false)

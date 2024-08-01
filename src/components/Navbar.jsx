@@ -8,6 +8,7 @@ import { RxCross2 } from "react-icons/rx";
 import { useSetRecoilState } from "recoil";
 import { sidebarAtom } from "../utils/atoms";
 import Avatar from "react-avatar";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const setSidebarToggle = useSetRecoilState(sidebarAtom);
@@ -30,11 +31,12 @@ const Navbar = () => {
         >
           <RxHamburgerMenu />
         </div>
-        <img
+          <a href="/">
+          <img
           src="../public/images/YoutubeLogoDark.png"
           alt="youtubeLogoDark"
           className="h-10 w-70 cursor-pointer"
-        />
+        /></a>
       </div>
       <div
         id="middle-navbar"

@@ -1,6 +1,6 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import {API_KEY, BASE_URL, YOUTUBE_VIDEO_API} from "../constant/youtube"
+import React, { useEffect, useState } from 'react';
+
 import VideoCart from './VideoCart'
 import { useRecoilValue} from 'recoil';
 import { sidebarAtom } from '../utils/atoms';
@@ -15,26 +15,7 @@ const WatchVideoContainer = () => {
   const videoId = searchParams.get('v');
 
 
-  const [video,setVideo] = useState([])
-  
-//   const fetchingYoutubeVideo = async ()=>{
-//  try {
-//   // const res = await axios.get(YOUTUBE_VIDEO_API)
-//   const res = await axios.get(YOUTUBE_VIDEO_API)
-
-
-
-//   const response = await axios.get(API_ENDPOINT, {
-//     params: {
-//       key: API_KEY,
-//       part: 'snippet',
-//       q: 'coding', // Replace with your search query
-//       maxResults: 10, // Number of results to fetch
-//       type: 'video', // Restrict to videos only
-//     },
-//   });
-
-//   console.log(response.data.items)
+  const [video,setVideo] = useState([]);
 
 
 
@@ -42,44 +23,14 @@ const WatchVideoContainer = () => {
 const buttonListArray = ["All", "Javascript", "Java", "Live", "Music", "Songs", "Vlogs", "Trending", "Programming", "News", "Technology", "Cricket", "Comedy", "Thriller", "Coding", "Computer Programming", "Netlify","basketball" , "Crime" , "Movie" , "AI" , "Masti","New to you"];
 
 
-
-
-
-
-
-
-
-
-
-
-//   setVideo(res.data.items);
-//  } catch (error) {
-//   console.log(error)
-//  }
-//   }
-
-
-
-const API_ENDPOINT = 'https://www.googleapis.com/youtube/v3/search';
-
 const fetchingYoutubeVideo = async ()=>{
 try {
-const res = await axios.get(YOUTUBE_VIDEO_API)
-console.log(res?.data?.items)
+  const apiKey = import.meta.env.VITE_API_KEY;
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+  const youtubeVideoApi = `${baseUrl}/videos?part=snippet,contentDetails,statistics&chart=mostPopular&maxResults=50&regionCode=IN&key=${apiKey}`;
 
-
-
-// const response = await axios.get(YOUTUBE_VIDEO_API, {
-//   params: {
-//     key: API_KEY,
-//     part: 'snippet',
-//     q: `${
-//       buttonListArray[Math.random(0,(buttonListArray.length))]
-//     }`, // Replace with your search query
-//     maxResults: 20, // Number of results to fetch
-//     type: 'video', // Restrict to videos only
-//   },
-// });
+  const res = await axios.get(youtubeVideoApi);
+console.log(res?.data?.items);
 
 
 setVideo(res?.data?.items);
