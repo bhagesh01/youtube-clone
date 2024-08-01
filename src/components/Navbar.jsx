@@ -33,7 +33,7 @@ const Navbar = () => {
         </div>
           <a href="/">
           <img
-          src="../public/images/YoutubeLogoDark.png"
+          src="../public/YoutubeLogoDark.png"
           alt="youtubeLogoDark"
           className="h-10 w-70 cursor-pointer"
         /></a>
