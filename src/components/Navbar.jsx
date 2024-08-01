@@ -32,15 +32,10 @@ const Navbar = () => {
           <RxHamburgerMenu />
         </div>
           <a href="/">
-          {/* <img
-          src="../YoutubeLogoDark.png"
-          alt="youtubeLogoDark"
-          className="h-10 w-70 cursor-pointer"
-        /> */}
-        <div className="flex items-center justify-center">
-        <h1 className="text-3xl pl-2 text-white font-bold text-red-500">Youtube</h1>
+       { <div className="flex items-center justify-center">
+        <h1 className="text-3xl pl-2 font-bold text-red-500">Youtube</h1>
         <h1 className="text-3xl text-white font-bold">Buddy</h1>
-        </div>
+        </div>}
         </a>
       </div>
       <div
