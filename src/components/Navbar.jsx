@@ -17,11 +17,11 @@ const Navbar = () => {
   return (
     <div
       id="navbar"
-      className="navbar h-16 w-[100%] flex items-center justify-between px-3 pt-5 py-3 sticky top-0 mb-3 bg-[#0F0F0F]"
+      className="navbar h-16 w-[100%] flex items-center justify-between pt-5 py-3 sticky top-0 mb-3 bg-[#0F0F0F]"
     >
       <div
         id="left-navbar"
-        className="flex items-center justify-center w-[20%] h-[100%]"
+        className="flex items-center justify-start pl-5 w-[20%] h-[100%]"
       >
         <div
           className="text-xl border border-transparent rounded-full cursor-pointer hover:bg-[#222222] text-white p-2 transition duration-450 ease-in-out"
@@ -32,11 +32,16 @@ const Navbar = () => {
           <RxHamburgerMenu />
         </div>
           <a href="/">
-          <img
+          {/* <img
           src="../YoutubeLogoDark.png"
           alt="youtubeLogoDark"
           className="h-10 w-70 cursor-pointer"
-        /></a>
+        /> */}
+        <div className="flex items-center justify-center">
+        <h1 className="text-3xl pl-2 text-white font-bold text-red-500">Youtube</h1>
+        <h1 className="text-3xl text-white font-bold">Buddy</h1>
+        </div>
+        </a>
       </div>
       <div
         id="middle-navbar"
