@@ -4,7 +4,6 @@ import { IoMdMore } from "react-icons/io";
 import { sidebarAtom, watchAtom } from "../utils/atoms";
 import { useRecoilValue } from "recoil";
 import moment from "moment";
-// import axios from 'axios';
 
 const VideoCart = ({ item }) => {
   const sidebarToggle = useRecoilValue(sidebarAtom);

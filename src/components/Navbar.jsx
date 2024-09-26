@@ -24,15 +24,10 @@ const Navbar = () => {
   const [active, setActive] = useRecoilState(categoryState);
 
   const handleSearch = () => {
-    // Update category state based on the input value
     setActive(inputValue);
-    setInputValue(""); // Clear the input after searching
+    setInputValue("");
   };
 
-
-  
-
-  // const [inputValue, setInputValue] = useState("");
   return (
     <div
       id="navbar"

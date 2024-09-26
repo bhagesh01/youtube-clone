@@ -12,8 +12,8 @@ const ChatMessage = ({ item }) => {
         />
       </div>
       <div className='flex items-center'>
-        <h1 className='ml-2 font-bold text-lg text-white'>{item.name}</h1> {/* Render the dynamic name */}
-        <p className='ml-2 py-1 text-lg text-white'>{item.message}</p> {/* Render the dynamic message */}
+        <h1 className='ml-2 font-bold text-lg text-white'>{item.name}</h1>
+        <p className='ml-2 py-1 text-lg text-white'>{item.message}</p>
       </div>
     </div>
   );

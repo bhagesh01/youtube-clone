@@ -1,15 +1,32 @@
 import React, { useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { messageState, messageUpdater } from '../utils/atoms'; // Recoil atoms and selectors
-import ChatMessage from './ChatMessage'; // Assuming ChatMessage is a separate component
-import {nameList} from "../constant/youtube"
-// Helper function to generate a random name
+import { messageState, messageUpdater } from '../utils/atoms';
+import ChatMessage from './ChatMessage';
 const generateRandomName = () => {
-  const names = [...nameList];
+  const names = ['Time', 'Past', 'Future', 'Dev',
+  'Fly', 'Flying', 'Soar', 'Soaring', 'Power', 'Falling',
+  'Fall', 'Jump', 'Cliff', 'Mountain', 'Rend', 'Red', 'Blue',
+  'Green', 'Yellow', 'Gold', 'Demon', 'Demonic', 'Panda', 'Cat',
+  'Kitty', 'Kitten', 'Zero', 'Memory', 'Trooper', 'XX', 'Bandit',
+  'Fear', 'Light', 'Glow', 'Tread', 'Deep', 'Deeper', 'Deepest',
+  'Mine', 'Your', 'Worst', 'Enemy', 'Hostile', 'Force', 'Video',
+  'Game', 'Donkey', 'Mule', 'Colt', 'Cult', 'Cultist', 'Magnum',
+  'Gun', 'Assault', 'Recon', 'Trap', 'Trapper', 'Redeem', 'Code',
+  'Script', 'Writer', 'Near', 'Close', 'Open', 'Cube', 'Circle',
+  'Geo', 'Genome', 'Germ', 'Spaz', 'Shot', 'Echo', 'Beta', 'Alpha',
+  'Gamma', 'Omega', 'Seal', 'Squid', 'Money', 'Cash', 'Lord', 'King',
+  'Duke', 'Rest', 'Fire', 'Flame', 'Morrow', 'Break', 'Breaker', 'Numb',
+  'Ice', 'Cold', 'Rotten', 'Sick', 'Sickly', 'Janitor', 'Camel', 'Rooster',
+  'Sand', 'Desert', 'Dessert', 'Hurdle', 'Racer', 'Eraser', 'Erase', 'Big',
+  'Small', 'Short', 'Tall', 'Sith', 'Bounty', 'Hunter', 'Cracked', 'Broken',
+  'Sad', 'Happy', 'Joy', 'Joyful', 'Crimson', 'Destiny', 'Deceit', 'Lies',
+  'Lie', 'Honest', 'Destined', 'Bloxxer', 'Hawk', 'Eagle', 'Hawker', 'Walker',
+  'Zombie', 'Sarge', 'Capt', 'Captain', 'Punch', 'One', 'Two', 'Uno', 'Slice',
+  'Slash', 'Melt', 'Melted', 'Melting', 'Fell', 'Wolf', 'Hound',
+  'Legacy', 'Sharp', 'Dead', 'Mew', 'Chuckle', 'Bubba', 'Bubble', 'Sandwich', 'Smasher', 'Extreme', 'Multi', 'Universe', 'Ultimate', 'Death', 'Ready', 'Monkey', 'Elevator', 'Wrench', 'Grease', 'Head', 'Theme', 'Grand', 'Cool', 'Kid', 'Boy', 'Girl', 'Vortex', 'Paradox'];
   return names[Math.floor(Math.random() * names.length)];
 };
 
-// Helper function to generate a random message of a specific length
 const generateRandomMessage = (length) => {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let result = '';
@@ -20,23 +37,20 @@ const generateRandomMessage = (length) => {
 };
 
 const LiveChat = () => {
-  const messages = useRecoilValue(messageState); // Retrieve the chat messages from Recoil state
-  const updateMessage = useSetRecoilState(messageUpdater); // Function to update messages in Recoil state
-
+  const messages = useRecoilValue(messageState);
+  const updateMessage = useSetRecoilState(messageUpdater);
   useEffect(() => {
-    // Interval to dispatch random messages every second
     const timer = setInterval(() => {
       updateMessage({
-        name: generateRandomName(), // Generates a random name
-        message: generateRandomMessage(10), // Generates a random message of 16 characters
+        name: generateRandomName(),
+        message: generateRandomMessage(10),
       });
     }, 1000);
 
-    // Cleanup the timer when component unmounts
     return () => {
       clearInterval(timer);
     };
-  }, [updateMessage]); // Adding dependency to ensure updateMessage is used
+  }, [updateMessage]);
 
   return (
     <div className='px-2'>

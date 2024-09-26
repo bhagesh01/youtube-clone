@@ -1,9 +1,9 @@
 import React from 'react';
 import { useRecoilState } from 'recoil';
-import { categoryState } from '../utils/atoms'; // Adjust the path as necessary
+import { categoryState } from '../utils/atoms';
 
 const ButtonList = () => {
-  const [active, setActive] = useRecoilState(categoryState); // Use Recoil state for category
+  const [active, setActive] = useRecoilState(categoryState);
 
   const buttonListArray = [
     "All", "Javascript", "Java", "Live", "Music", "Songs",

@@ -209,7 +209,6 @@ const sideBarItem = [
   },
 ];
 
-// next section will be subcriptions.
 
 const Sidebar = () => {
   const [sidebarToggle , setSidebarToggle] = useRecoilState(sidebarAtom);
@@ -228,7 +227,6 @@ const Sidebar = () => {
     <div
     className="h-[100%] border border-1 border-zinc-600 overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-900 scrollbar-track-gray-100 hidden xl:flex w-0 md:w-[19%]"
     style={{
-      // left: sidebarToggle ? "0" : "-26.5rem",
       width:sidebarToggle?"19%":"0",
       transition: "all 0.3s ease-in-out",
       position: "sticky",

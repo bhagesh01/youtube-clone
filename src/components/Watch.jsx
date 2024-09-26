@@ -94,7 +94,7 @@ const Watch = () => {
 
   const prettifyDescription = (text) => {
     return text.split('\n').map((line, index) => {
-      if (line.trim() === '') return <br key={index} />; // Add line break for empty lines
+      if (line.trim() === '') return <br key={index} />;
       return (
         <p key={index} className="my-2 text-sm">
           {line.includes('http') ? <a href={line} target="_blank" rel="noopener noreferrer" className='text-blue-500'>{line}</a> : line}

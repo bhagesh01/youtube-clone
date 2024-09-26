@@ -3,16 +3,14 @@ import React, { useEffect, useState } from 'react';
 import VideoCart from './VideoCart';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { categoryState, sidebarAtom, videoState } from '../utils/atoms';
-import { Link } from 'react-router-dom';
 import SkeletonVideoContainer from './SkeletonVideoContainer';
 
 const VideoContainer = () => {
   const sidebarToggle = useRecoilValue(sidebarAtom);
-  const [loading, setLoading] = useState(true); // Set loading to true initially
-  const [video, setVideo] = useRecoilState(videoState); // Using Recoil to manage video state
+  const [loading, setLoading] = useState(true);
+  const [video, setVideo] = useRecoilState(videoState);
   const [category] = useRecoilState(categoryState); 
 
-  // Fetch popular YouTube videos
   const fetchingYoutubeVideo = async () => {
     try {
       setLoading(true);
@@ -26,13 +24,13 @@ const VideoContainer = () => {
       setVideo(res?.data?.items || []);
     } catch (error) {
       console.error("Error fetching YouTube video data:", error);
-      setVideo([]); // Ensure `video` is an empty array on error
+      setVideo([]);
     } finally {
       setLoading(false);
     }
   };
 
-  // Fetch YouTube videos by selected category
+
   const fetchVideoByCategory = async () => {
     try {
       setLoading(true);
@@ -45,20 +43,20 @@ const VideoContainer = () => {
       setVideo(res?.data?.items || []);
     } catch (error) {
       console.error("Error fetching YouTube video data by category:", error);
-      setVideo([]); // Ensure `video` is an empty array on error
+      setVideo([]);
     } finally {
       setLoading(false);
     }
   };
 
-  // Use effect to determine whether to fetch popular videos or videos by category
+
   useEffect(() => {
     if (category) {
-      fetchVideoByCategory(); // Fetch videos by selected category
+      fetchVideoByCategory();
     } else {
-      fetchingYoutubeVideo(); // Fetch popular videos if no category is selected
+      fetchingYoutubeVideo();
     }
-  }, [category]); // Dependency on category to refetch on change
+  }, [category]);
 
   return (
     <div

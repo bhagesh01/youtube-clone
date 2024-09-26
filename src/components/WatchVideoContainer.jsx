@@ -5,7 +5,6 @@ import VideoCart from './VideoCart'
 import { useRecoilValue, useSetRecoilState} from 'recoil';
 import { messageState, messageUpdater, sidebarAtom } from '../utils/atoms';
 import { Link, useSearchParams } from 'react-router-dom';
-// import ChatMessage from './ChatMessage';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import LiveChat from './LiveChat';
 import Avatar from 'react-avatar';
@@ -29,8 +28,8 @@ const WatchVideoContainer = () => {
 const buttonListArray = ["All", "Javascript", "Java", "Live", "Music", "Songs", "Vlogs", "Trending", "Programming", "News", "Technology", "Cricket", "Comedy", "Thriller", "Coding", "Computer Programming", "Netlify","basketball" , "Crime" , "Movie" , "AI" , "Masti","New to you"];
 
 
-const messages = useRecoilValue(messageState); // Get current chat messages
-  const updateMessage = useSetRecoilState(messageUpdater); // Function to add new message
+const messages = useRecoilValue(messageState);
+  const updateMessage = useSetRecoilState(messageUpdater);
 
 
 
@@ -43,7 +42,7 @@ try {
   const youtubeVideoApi = `${baseUrl}/videos?part=snippet,contentDetails,statistics&chart=mostPopular&maxResults=50&regionCode=IN&key=${apiKey}`;
 
   const res = await axios.get(youtubeVideoApi);
-console.log(res?.data?.items);
+// console.log(res?.data?.items);
 
 
 setVideo(res?.data?.items);
@@ -52,7 +51,6 @@ console.log(error)
 }
 }
 
-// console.log(videoId?.videoCategories)
 
   useEffect(()=>{
     fetchingYoutubeVideo()
@@ -61,8 +59,8 @@ console.log(error)
 
   const sendMessage = () => {
     if (input.trim() !== "") {
-      updateMessage({ name: "Patel", message: input }); // Add message to Recoil state
-      setInput(""); // Clear the input
+      updateMessage({ name: "Patel", message: input });
+      setInput("");
     }
   };
 
