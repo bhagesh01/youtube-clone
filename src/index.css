@@ -21,11 +21,17 @@
   width: 8px;
   height: 8px;
 }
+#videoContainer{
+  display: flex;
+  flex-direction: column;
+  row-gap: 35px;
+}
 
 #videoContainer::-webkit-scrollbar-thumb {
   background-color: #46484c; /* Thumb color */
   border-radius: 4px;
 }
+
 
 #sideBar::-webkit-scrollbar-track {
   background-color: transparent; /* Track color */
@@ -40,3 +46,72 @@
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+
+
+
+
+
+
+
+
+@media only screen and (min-width: 768px) {
+  #videoContainer {
+    display: grid;
+    /* grid-template-columns: repeat(3, 1fr); 2 boxes per row */
+    grid-column-gap: 10px;
+    grid-row-gap: 5px;
+  }
+  .grid-3-columns {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .grid-4-columns {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  #video-cart{
+    width:30vw;
+    height: 50vh;
+  }
+  #right-navbar{
+    gap: 2.5rem;
+  }
+
+  #navbar{
+    width:100%;
+  }
+
+  #left-navbar a div h1{
+    font-size: 1.875rem /* 30px */;
+    line-height: 2.25rem
+  }
+
+}
+
+
+@media only screen and (min-width: 1024px) {
+  /* #videoContainer {
+    grid-template-columns: repeat(4, 1fr);
+  } */
+  #video-cart{
+    width:24vw;
+    height: 50vh;
+  }
+  .grid-3-columns {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .grid-4-columns {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+}
+
+@media only screen and (min-width: 1400px){
+
+  #navbar{
+    padding-left: 2.5rem;
+  }
+}
+

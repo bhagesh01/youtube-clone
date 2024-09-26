@@ -1,19 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoSearchOutline } from "react-icons/io5";
 import { MdKeyboardVoice } from "react-icons/md";
 import { RiVideoAddLine } from "react-icons/ri";
 import { IoMdNotifications } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
-import { useSetRecoilState } from "recoil";
-import { sidebarAtom } from "../utils/atoms";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { categoryState, navbarInputValue, sidebarAtom } from "../utils/atoms";
 import Avatar from "react-avatar";
-import { Link } from "react-router-dom";
+import { Link, useRouteError } from "react-router-dom";
 
 const Navbar = () => {
   const setSidebarToggle = useSetRecoilState(sidebarAtom);
+  const [inputValue , setInputValue] = useRecoilState(navbarInputValue);
 
-  const [inputValue, setInputValue] = useState("");
+  useEffect(()=>{
+    const width = window.innerWidth;
+    if(width < 1024){
+      setSidebarToggle(false);
+    }
+  },[])
+
+  const [active, setActive] = useRecoilState(categoryState);
+
+  const handleSearch = () => {
+    // Update category state based on the input value
+    setActive(inputValue);
+    setInputValue(""); // Clear the input after searching
+  };
+
+
+  
+
+  // const [inputValue, setInputValue] = useState("");
   return (
     <div
       id="navbar"
@@ -21,10 +40,10 @@ const Navbar = () => {
     >
       <div
         id="left-navbar"
-        className="flex items-center justify-start pl-5 w-[20%] h-[100%]"
+        className="flex items-center justify-start w-[20%] h-[100%]"
       >
         <div
-          className="text-xl border border-transparent rounded-full cursor-pointer hover:bg-[#222222] text-white p-2 transition duration-450 ease-in-out"
+          className="text-xl border border-transparent rounded-full cursor-pointer hover:bg-[#222222] text-white p-2 transition duration-450 ease-in-out hidden lg:flex"
           onClick={() => {
             setSidebarToggle((prev) => !prev);
           }}
@@ -33,17 +52,17 @@ const Navbar = () => {
         </div>
           <a href="/">
        { <div className="flex items-center justify-center">
-        <h1 className="text-3xl pl-2 font-bold text-red-500">Youtube</h1>
-        <h1 className="text-3xl text-white font-bold">Buddy</h1>
+        <h1 className="text-xl pl-2 font-bold text-red-500">Youtube</h1>
+        <h1 className="text-xl text-white font-bold">Buddy</h1>
         </div>}
         </a>
       </div>
       <div
         id="middle-navbar"
-        className="w-[50%] flex items-center justify-center gap-4"
+        className="w-[20%] flex items-center justify-center pl-6 gap-4"
       >
         <div className="flex items-center justify-center bg-[#222222] border border-1 rounded-3xl px-3 py-2 border-transparent">
-          <div className="flex items-center justify-center">
+          <div className="lg:flex items-center justify-center hidden">
             <input
               type="text"
               placeholder="Search here..."
@@ -66,8 +85,8 @@ const Navbar = () => {
               </div>
             )}
           </div>
-          <div className="text-white text-2xl border border-l-1 border-r-0 border-y-0 pl-3 cursor-pointer">
-            <IoSearchOutline />
+          <div className="text-white text-2xl border border-l-1 border-r-0 border-y-0 pl-3 cursor-pointer" >
+           <IoSearchOutline onClick={handleSearch} href="./"/>
           </div>
         </div>
         <div className="text-white cursor-pointer p-2 border border-transparent hover:bg-[#222222] transition-all ease-linear rounded-full text-2xl">
@@ -75,8 +94,8 @@ const Navbar = () => {
         </div>
       </div>
       <div
-        id="right-navbar "
-        className="w-[20%] flex items-center justify-center gap-10 "
+        id="right-navbar"
+        className="w-[30%] flex items-center justify-center gap-5"
       >
         <div className="text-2xl text-white cursor-pointer">
           <RiVideoAddLine />

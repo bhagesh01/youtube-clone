@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoHome } from "react-icons/io5";
 import { SiYoutubeshorts } from "react-icons/si";
 import { MdOutlineWatchLater } from "react-icons/md";
 import { AiOutlineLike } from "react-icons/ai";
 import { LiaDownloadSolid } from "react-icons/lia";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { sidebarAtom } from "../utils/atoms";
 const sideBarItem = [
   {
@@ -212,14 +212,21 @@ const sideBarItem = [
 // next section will be subcriptions.
 
 const Sidebar = () => {
-  const sidebarToggle = useRecoilValue(sidebarAtom);
+  const [sidebarToggle , setSidebarToggle] = useRecoilState(sidebarAtom);
   if (sidebarToggle == true) {
     console.log("it is open");
   }
 
+  useEffect(()=>{
+    const width = window.innerWidth;
+    if(width < 1024){
+      setSidebarToggle(false);
+    }
+  },[])
+
   return (
     <div
-    className="h-[100%] border border-1 border-zinc-600 overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-900 scrollbar-track-gray-100"
+    className="h-[100%] border border-1 border-zinc-600 overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-900 scrollbar-track-gray-100 hidden xl:flex w-0 md:w-[19%]"
     style={{
       // left: sidebarToggle ? "0" : "-26.5rem",
       width:sidebarToggle?"19%":"0",

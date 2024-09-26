@@ -1,16 +1,18 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import VideoCart from './VideoCart';
-import { useRecoilValue } from 'recoil';
-import { sidebarAtom } from '../utils/atoms';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { categoryState, sidebarAtom, videoState } from '../utils/atoms';
 import { Link } from 'react-router-dom';
 import SkeletonVideoContainer from './SkeletonVideoContainer';
 
 const VideoContainer = () => {
   const sidebarToggle = useRecoilValue(sidebarAtom);
-  const [loading, setLoading] = useState(false);
-  const [video, setVideo] = useState([]);
+  const [loading, setLoading] = useState(true); // Set loading to true initially
+  const [video, setVideo] = useRecoilState(videoState); // Using Recoil to manage video state
+  const [category] = useRecoilState(categoryState); 
 
+  // Fetch popular YouTube videos
   const fetchingYoutubeVideo = async () => {
     try {
       setLoading(true);
@@ -22,35 +24,55 @@ const VideoContainer = () => {
       console.log(res?.data?.items);
 
       setVideo(res?.data?.items || []);
-      setLoading(false);
     } catch (error) {
       console.error("Error fetching YouTube video data:", error);
       setVideo([]); // Ensure `video` is an empty array on error
+    } finally {
       setLoading(false);
     }
   };
 
+  // Fetch YouTube videos by selected category
+  const fetchVideoByCategory = async () => {
+    try {
+      setLoading(true);
+      const apiKey = import.meta.env.VITE_API_KEY;
+      const baseUrl = import.meta.env.VITE_BASE_URL;
+      const youtubeVideoByCategoryApi = `${baseUrl}/search?part=snippet&maxResults=50&q=${encodeURIComponent(category)}&type=video&key=${apiKey}`;
+
+      const res = await axios.get(youtubeVideoByCategoryApi);
+      console.log(res?.data?.items);
+      setVideo(res?.data?.items || []);
+    } catch (error) {
+      console.error("Error fetching YouTube video data by category:", error);
+      setVideo([]); // Ensure `video` is an empty array on error
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Use effect to determine whether to fetch popular videos or videos by category
   useEffect(() => {
-    fetchingYoutubeVideo();
-  }, []);
+    if (category) {
+      fetchVideoByCategory(); // Fetch videos by selected category
+    } else {
+      fetchingYoutubeVideo(); // Fetch popular videos if no category is selected
+    }
+  }, [category]); // Dependency on category to refetch on change
 
   return (
     <div
       id='videoContainer'
-      className={`w-[100%] h-[100%] pl-3 pt-2 overflow-y-scroll`}
-      style={{
-        display: 'grid',
-        gridTemplateColumns: sidebarToggle ? 'repeat(3, 1fr)' : 'repeat(4, 1fr)',
-        gridTemplateRows: 'repeat(2, 1fr)',
-        gridColumnGap: '10px',
-        gridRowGap: '35px',
-      }}
+      className={`w-full h-full pl-3 pt-2 overflow-y-scroll ${sidebarToggle ? 'grid grid-cols-3' : 'grid grid-cols-4'}`}
     >
       {loading ? (
         <SkeletonVideoContainer />
       ) : video.length > 0 ? (
         video.map((item) => (
-          <Link to={`/watch?v=${item.id}`} key={item.id}>
+          <Link 
+            to={`/watch?v=${typeof item.id === 'object' ? item.id.videoId : item.id}`} 
+            key={typeof item.id === 'object' ? item.id.videoId : item.id}
+          >
             <VideoCart item={item} />
           </Link>
         ))

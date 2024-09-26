@@ -82,6 +82,35 @@ const Watch = () => {
 
   const sidebarToggle = useRecoilValue(sidebarAtom);
 
+
+
+
+
+
+
+
+
+
+
+  const prettifyDescription = (text) => {
+    return text.split('\n').map((line, index) => {
+      if (line.trim() === '') return <br key={index} />; // Add line break for empty lines
+      return (
+        <p key={index} className="my-2 text-sm">
+          {line.includes('http') ? <a href={line} target="_blank" rel="noopener noreferrer" className='text-blue-500'>{line}</a> : line}
+        </p>
+      );
+    });
+  };
+
+
+
+
+
+
+
+
+
   return (
     !loading ? (<div className='flex justify-between h-[100%] w-[100%]'>
       <div
@@ -184,7 +213,7 @@ const Watch = () => {
 
         <div
           id='description-box'
-          className={`rounded-xl bg-slate-700 h-fit sideBar ${showLess ?"w-[100px]" : "fit"}`}
+          className={`rounded-xl bg-[#272727] h-fit sideBar ${showLess ?"w-[100px]" : "fit"}`}
           style={{
             width: sidebarToggle ? '780px' : '1000px',
             // height: showLess ? '100px' : 'fitContent',
@@ -199,7 +228,7 @@ const Watch = () => {
             </h1>
           </div>
           <div className='mt-1 px-4'>
-            <span className='text-white'>{videoDescription}</span>
+            <span className='text-white'>{prettifyDescription(videoDescription)}</span>
           </div>
           <div className='ml-4 mt-1'>
             <h1

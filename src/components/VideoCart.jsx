@@ -40,10 +40,8 @@ const VideoCart = ({ item }) => {
 
   return (
     <div
-      className="cursor-pointer mb-4"
-      style={{ width:(sidebarToggle ? "25vw" : "23.5vw") ,
-        height:"45vh",
-       }}
+      className="cursor-pointer mb-4 w-[95vw] h-[50vh]"
+      id="video-cart"
     >
       <div className="bg-center object-cover rounded-[10px] h-[70%] w-[100%]">
         <img
